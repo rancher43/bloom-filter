@@ -1,0 +1,11 @@
+Bloom filters are a probabilistic data structure that allows Cassandra to determine one of two possible states:
+
+1-The data definitely does not exist in the given file (SSTable).
+2-The data probably exists in the given file.
+
+An empty Bloom filter is a bit array of m bits, all set to 0. There must also be k different hash functions defined, each of which maps or hashes some set element to one of the m array positions, generating a uniform random distribution.
+
+To query for an element (test whether it is in the RAM), feed it to each of the k hash functions to get k array positions. If any of the bits at these positions is 0, the element is definitely not in the RAM.
+
+While bloom filters can not guarantee that the data exists in a given SSTable, bloom filters can be made more accurate by allowing them to consume more RAM.
+
